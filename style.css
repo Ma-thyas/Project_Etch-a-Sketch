@@ -1,0 +1,44 @@
+
+body {
+    font-family: 'Palette Mosaic', cursive;
+    background-color: aliceblue;
+}
+
+h1 {
+    font-size: 50px;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+#colorpicker {
+
+}
+
+.sider {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.container {
+    display: grid;
+    background-color: rgb(230, 195, 195);
+    height: 550px;
+    width: 550px;
+    
+}
+
+
+
+.cell {
+  border: 1px solid rgb(116, 115, 115);
+  display: inline-block;
+} 
+
