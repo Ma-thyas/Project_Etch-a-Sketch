@@ -1,23 +1,20 @@
 
 let defaultColor = 'rgb(0,0,0)';
+let noColor = '';
+let randomColor = '';
+let pickedColor = '';
 let defaultSize = 16;
 let defaultSizeLabel = `${defaultSize}x${defaultSize}`;
+let defaultMode = 'default';
 
 const grid = document.querySelector('.container');
 const colorMode = document.querySelector('#colormode');
 const colorPicker = document.querySelector('#colorpicker');
 const multicolorMode = document.querySelector('#multicolormode');
+const eraseMode = document.querySelector('#erase');
 const gridSize = document.querySelector('#gridsize');
 const gridLabel = document.querySelector('#gridlabel');
-
-
-
-   // choose color from color picker
-function colorSelection(e) {
-    defaultColor = e.target.value;
-};
-
-colorPicker.addEventListener('input', colorSelection);
+const clearGrid = document.querySelector('#clear');
 
 
    // change size label
@@ -40,6 +37,12 @@ function reloadGrid() {
     grid.innerHTML='';
 }
 
+ //erase button
+clearGrid.addEventListener('click', () => {
+    reloadGrid();
+    createGrid(defaultSize);
+    });
+
 
 function createGrid(size) {
     //create grid
@@ -55,30 +58,54 @@ function createGrid(size) {
     } 
 }
 
+
+// choose color from color picker
+function colorSelection(e) {
+    pickedColor = e.target.value;
+};
+
+colorPicker.addEventListener('input', colorSelection);
+
+
 // choose a random color
 function newColor() {
-
     const arrayOfColor = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
-
     let randomColorString = '#';
 
-    for (let x = 0; x < 6; x++){
+    for (let x = 0; x < 6; x++) {
+        let index = Math.floor(Math.random() * 16)
+        let value = arrayOfColor[index]
 
-    let index = Math.floor(Math.random() * 16)
-    let value = arrayOfColor[index]
-
-    randomColorString += value
+        randomColorString += value
     }
+
+    randomColor = randomColorString;
 }
 
-    // choose random color from button
-multicolorMode.addEventListener('click', (e) => newColor);
+
+colorMode.addEventListener('click',(e) => defaultMode ='default');
+colorPicker.addEventListener('click',(e) => defaultMode ='color');
+multicolorMode.addEventListener('click', (e) => defaultMode ='multicolor');
+eraseMode.addEventListener('click', (e) => defaultMode ='eraseMode');
+
 
  //change color of cells
  function changeColor(e) {
-    e.target.style.backgroundColor = defaultColor;
-}
+     if (e.type === 'mouseup' && e.type === 'mouseover') return;
+    if (defaultMode == 'default') {
+         e.target.style.backgroundColor = defaultColor;
+    } else if (defaultMode == 'color') {
+        e.target.style.backgroundColor = pickedColor;
+        colorMode.addEventListener('click',(e) => defaultMode ='color');
+     } else if (defaultMode == 'multicolor') {
+        newColor();
+        e.target.style.backgroundColor = randomColor;
+     } else if (defaultMode = 'eraseMode') {
+         e.target.style.backgroundColor = noColor;
+     } 
 
+};
+ 
 
 
 
