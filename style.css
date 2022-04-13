@@ -1,12 +1,15 @@
 
 body {
-    font-family: 'Palette Mosaic', cursive;
+    font-family: 'Square Peg', cursive;
     background-color: aliceblue;
+    color: rgb(3, 3, 77);
 }
 
 h1 {
-    font-size: 50px;
+    font-size: 70px;
     text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 main {
@@ -14,17 +17,45 @@ main {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 80px;
 }
 
-#colorpicker {
-
-}
 
 .sider {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    font-size: 30px;
     
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    transition: 1s;
+}
+
+#color {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
+input[type="color"] { 
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
 }
 
 .container {
