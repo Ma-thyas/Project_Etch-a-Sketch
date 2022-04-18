@@ -6,6 +6,7 @@ let pickedColor = '';
 let defaultSize = 16;
 let defaultSizeLabel = `${defaultSize}x${defaultSize}`;
 let defaultMode = 'default';
+let penActive = false;
 
 const grid = document.querySelector('.container');
 const colorMode = document.querySelector('#colormode');
@@ -43,7 +44,7 @@ clearGrid.addEventListener('click', () => {
     createGrid(defaultSize);
     });
 
-
+   
 function createGrid(size) {
     //create grid
     grid.style.gridTemplateRows = `repeat(${size},1fr)`;
@@ -57,7 +58,6 @@ function createGrid(size) {
         grid.appendChild(cell);
     } 
 }
-
 
 // choose color from color picker
 function colorSelection(e) {
@@ -73,25 +73,28 @@ function newColor() {
     let randomColorString = '#';
 
     for (let x = 0; x < 6; x++) {
-        let index = Math.floor(Math.random() * 16)
-        let value = arrayOfColor[index]
-
-        randomColorString += value
+        let index = Math.floor(Math.random() * 16);
+        let value = arrayOfColor[index];
+        randomColorString += value;
     }
 
     randomColor = randomColorString;
 }
 
-
+//adding button events
 colorMode.addEventListener('click',(e) => defaultMode ='default');
 colorPicker.addEventListener('click',(e) => defaultMode ='color');
 multicolorMode.addEventListener('click', (e) => defaultMode ='multicolor');
 eraseMode.addEventListener('click', (e) => defaultMode ='eraseMode');
 
+//drawing only when mousedown
+document.addEventListener('mousedown', (e) => penActive = true);
+document.addEventListener('mouseup', (e) => penActive = false);
+
 
  //change color of cells
- function changeColor(e) {
-     if (e.type === 'mouseup' && e.type === 'mouseover') return;
+function changeColor(e) {
+    if (e.type === 'mouseover' && penActive === false) return;
     if (defaultMode == 'default') {
          e.target.style.backgroundColor = defaultColor;
     } else if (defaultMode == 'color') {
@@ -102,12 +105,9 @@ eraseMode.addEventListener('click', (e) => defaultMode ='eraseMode');
         e.target.style.backgroundColor = randomColor;
      } else if (defaultMode = 'eraseMode') {
          e.target.style.backgroundColor = noColor;
-     } 
+     }   
 
 };
- 
-
-
 
 window.onload = () => {
     createGrid(defaultSize);

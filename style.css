@@ -21,7 +21,7 @@ main {
 }
 
 
-.sider {
+.menu {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -62,14 +62,18 @@ input[type="color"] {
     display: grid;
     background-color: rgba(255, 255, 255, 0.582);
     height: 550px;
-    width: 550px;
-    
+    width: 550px;  
 }
-
 
 
 .cell {
   border: 1px solid rgb(116, 115, 115, 0.2);
   display: inline-block;
 } 
+
+@media (max-width: 650px) {
+    main {
+        flex-direction: column-reverse;
+    }
+}
 
